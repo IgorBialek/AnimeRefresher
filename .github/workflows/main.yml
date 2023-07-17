@@ -1,0 +1,31 @@
+name: 'Add a new comment to a specific issue'
+on:
+  schedule:
+    # Define your own schedule after "cron: "
+    # Add a comment to the end of the line to read it in plain language 🕓
+    # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#scheduled-events
+    - cron: "*/5 * * * *"
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: 420, # replace with the number of the specific issue the action will comment on
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `# Replace me with your own content!
+              
+              Use multiple lines of **Markdown** here to create your own templated issue comment.
+              
+              | Even | Tables | 
+              | --- | --- |
+              | If you | want to |
+              
+              Just keep the comment body between the backticks.
+              `
+            })
