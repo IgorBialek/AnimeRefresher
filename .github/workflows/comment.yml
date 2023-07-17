@@ -2,6 +2,9 @@ name: Post Daily Comment
 on:
   schedule:
     - cron: '0 0 * * *'  # Runs every day at midnight UTC
+  issues:
+    types:
+      - labeled
 
 jobs:
   comment:
