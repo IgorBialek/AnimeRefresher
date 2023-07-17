@@ -1,7 +1,7 @@
 name: Post Daily Comment
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Runs every day at midnight UTC
+    - cron: '*/1 * * * *'  # Runs every day at midnight UTC
   issues:
     types:
       - labeled
