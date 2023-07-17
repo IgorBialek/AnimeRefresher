@@ -12,10 +12,10 @@ jobs:
     steps:
       - uses: actions/github-script@v3
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{secrets.TOKEN}}
           script: |
             github.issues.createComment({
-              issue_number: 420, # replace with the number of the specific issue the action will comment on
+              issue_number: 2, # replace with the number of the specific issue the action will comment on
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `# Replace me with your own content!
