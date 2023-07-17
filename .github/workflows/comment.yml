@@ -22,13 +22,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Post comment
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        run: |
-          echo "Developers reports for: $(date +"%Y-%m-%d")" > comment.txt
-          commit_sha=$(git rev-parse HEAD)
-          thread_id="https://github.com/IgorBialek/AnimeRefresher/discussions/2"  # Replace with the discussion thread ID
-          api_url="https://api.github.com/repos/${{ github.repository }}/git/commits/${commit_sha}/comments"
-          comment_body=$(cat comment.txt)
-          curl -sSL -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "{\"body\":\"$comment_body\", \"thread_id\":\"$thread_id\"}" $api_url
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          issue-number: 2
+          body: |
+            This is a multi-line test comment
+            - With GitHub **Markdown** :sparkles:
+            - Created by [create-or-update-comment][2]
+
+            [1]: https://github.com/peter-evans/create-or-update-comment
+          reactions: '+1'
